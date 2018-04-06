@@ -16,7 +16,7 @@ document.querySelector("#add-domain").addEventListener("click", function() {
         browser.storage.local.set({
             whitelist: result.whitelist + document.querySelector("#new-domain").value + "|"
         });
-        document.querySelector("#whitelist").innerHTML += "<tr><td>" + document.querySelector("#new-domain").value + "</td></tr>";
+        restoreOptions();
     }, gotError);
 });
 
@@ -34,7 +34,7 @@ function restoreOptions() {
 
         var split = result.whitelist.split("|");
         for (var index in split) {
-            console.log(split[index]);
+            //console.log(split[index]);
             if (split[index] != "") {
                 document.querySelector("#whitelist").innerHTML += "<tr><td>" + split[index] + "<div class='remove-domain' data-domain-index='"+ index.toString() +"'>❌</div></td></tr>";
             }
@@ -56,8 +56,8 @@ function restoreOptions() {
                     browser.storage.local.set({
                         whitelist: whitelist
                     });
+                    restoreOptions();
                 }, gotError);
-                restoreOptions();
             });
         }
     }, gotError);

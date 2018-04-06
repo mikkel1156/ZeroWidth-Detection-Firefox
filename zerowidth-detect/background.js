@@ -7,7 +7,6 @@ function gotError(error) {
 //  Handle message
 browser.runtime.onMessage.addListener(function(request, sender, sendResponse) {
     if (request.type === "html") {
-        console.log("HTML");
         var pattern = /(‍|‌|​|⁠)/gi
         var temp = request.data.match(pattern);
 
@@ -21,9 +20,11 @@ browser.runtime.onMessage.addListener(function(request, sender, sendResponse) {
             text: charDict[request.url].length.toString()
         });
 
-        browser.storage.local.get("replace").then(function(result) {
-            var newHTML = "wtf";
-            console.log("REPLACE: " + result.replace);
+        var newHTML = request.data.replace(pattern, "🕵");
+        sendResponse({
+            data: newHTML
+        });
+        /*browser.storage.local.get("replace").then(function(result) {
             if (result.replace == null || result.replace == "") {
                 console.log("No replace");
                 newHTML = request.data.replace(pattern, "🕵");
@@ -32,10 +33,12 @@ browser.runtime.onMessage.addListener(function(request, sender, sendResponse) {
                 newHTML = request.data.replace(pattern, result.replace);
             }
             console.log("NEW HTML: \n" + newHTML);
+        }, gotError);
+        setTimeout(() => {
             sendResponse({
                 data: newHTML
             });
-        }, gotError);
+        }, 2000);*/
     } else if (request.type === "get-chars") {
         sendResponse({
             data: charDict[request.url]
