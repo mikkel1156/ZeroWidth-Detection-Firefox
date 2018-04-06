@@ -4,41 +4,13 @@ function gotError(error) {
     console.log(`Error: ${error}`);
 }
 
-//  Handle message
+//  Handle messages
 browser.runtime.onMessage.addListener(function(request, sender, sendResponse) {
-    if (request.type === "html") {
-        var pattern = /(‍|‌|​|⁠)/gi
-        var temp = request.data.match(pattern);
-
-        var characters = "";
-        for (var index in temp) {
-            characters += temp[index];
-        }
-
-        charDict[request.url] = characters;
+    if (request.type === "update-info") {
+        charDict[request.url] = request.data;
         browser.browserAction.setBadgeText({
-            text: charDict[request.url].length.toString()
+            text: (request.data.length/2).toString()
         });
-
-        var newHTML = request.data.replace(pattern, "🕵");
-        sendResponse({
-            data: newHTML
-        });
-        /*browser.storage.local.get("replace").then(function(result) {
-            if (result.replace == null || result.replace == "") {
-                console.log("No replace");
-                newHTML = request.data.replace(pattern, "🕵");
-            } else {
-                console.log("Custom replace");
-                newHTML = request.data.replace(pattern, result.replace);
-            }
-            console.log("NEW HTML: \n" + newHTML);
-        }, gotError);
-        setTimeout(() => {
-            sendResponse({
-                data: newHTML
-            });
-        }, 2000);*/
     } else if (request.type === "get-chars") {
         sendResponse({
             data: charDict[request.url]
@@ -54,7 +26,7 @@ browser.tabs.onActivated.addListener(function(activeInfo) {
         let tab = tabs[0]
         if (charDict[tab.url] != null) {
             browser.browserAction.setBadgeText({
-                text: charDict[tab.url].length.toString()
+                text: (charDict[tab.url].length/2).toString()
             });
         } else {
             browser.browserAction.setBadgeText({

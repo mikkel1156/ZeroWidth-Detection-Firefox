@@ -5,9 +5,14 @@
 
     "description": "Checks websites that you visit for invisible zero-width characters and replaces them with an emoji while alerting you about it.",
 
+    "icons": {
+        "48": "icon.png"
+    },
+
     "browser_action": {
-        "default_title": "Zero-width character Detection",
-        "default_popup": "popup/popup.html"
+        "default_icon": "icon.png",
+        "default_popup": "popup/popup.html",
+        "default_title": "Zero-width character Detection"
     },
 
     "options_ui": {

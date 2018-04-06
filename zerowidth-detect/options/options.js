@@ -7,6 +7,7 @@ document.querySelector("#reset").addEventListener("click", function() {
         whitelist: "",
         replace: ""
     });
+    restoreOptions();
 });
 
 document.querySelector("#add-domain").addEventListener("click", function() {
@@ -63,7 +64,11 @@ function restoreOptions() {
     }, gotError);
 
     browser.storage.local.get("replace").then(function(result) {
-        document.querySelector("#new-replace").value = result.replace || "🕵"
+        if (result.replace == null) {
+            document.querySelector("#new-replace").value = "🕵";
+        } else {
+            document.querySelector("#new-replace").value = result.replace;
+        }
     }, gotError);
 }
 

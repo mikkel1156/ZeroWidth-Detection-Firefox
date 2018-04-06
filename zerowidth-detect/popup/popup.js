@@ -9,11 +9,11 @@ function gotInfo(response) {
     if (response.data == null)
         return;
 
-    document.getElementById("chars-found").innerHTML = response.data.length.toString();
-    var bytes = response.data.length * 2;
+    document.getElementById("chars-found").innerHTML = (response.data.length/2).toString();
+    var bytes = response.data.length;
     document.getElementById("chars-size").innerHTML = bytes.toString();
     browser.browserAction.setBadgeText({
-        text: response.data.length.toString()
+        text: (response.data.length/2).toString()
     });
 }
 
@@ -32,6 +32,7 @@ document.getElementById("copy-chars").addEventListener("click", function() {
 
             charCopy = true;
             chars = response.data;
+            console.log("|"+ chars +"|");
             document.execCommand("Copy");
         }, gotError);
     }, gotError);
