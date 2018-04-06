@@ -1,0 +1,33 @@
+{
+    "manifest_version": 2,
+    "name": "ZeroWidth Detection",
+    "version": "1.0",
+
+    "description": "Checks websites that you visit for invisible zero-width characters and replaces them with an emoji while alerting you about it.",
+
+    "browser_action": {
+        "default_title": "Zero-width character Detection",
+        "default_popup": "popup/popup.html"
+    },
+
+    "options_ui": {
+        "page": "options/options.html"
+    },
+
+    "content_scripts": [{
+        "matches": ["<all_urls>"],
+        "js": ["zerowidth-detect.js"]
+    }],
+
+    "background": {
+        "scripts": ["background.js"],
+        "persistent": true
+    },
+
+    "permissions": [
+        "tabs",
+        "storage",
+        "webRequest"
+    ]
+
+}

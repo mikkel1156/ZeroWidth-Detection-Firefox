@@ -1,0 +1,37 @@
+html, body {
+    width: 200px;
+}
+
+#popup-header h1 {
+    font-size: 20px;
+    text-align: center;
+}
+
+#info {
+    margin-bottom: 5px;
+}
+
+.button {
+    display: inline-block;
+    width: 50px;
+    padding: 4px;
+    color: #fff;
+    background-color: #000;
+    border: 2px solid #000;
+    text-align: center;
+    outline: none;
+    text-decoration: none;
+    transition: background-color 0.2s ease-out, color 0.2s ease-out;
+
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+}
+.button:hover,
+.button:active {
+    background-color: #fff;
+    border-color: #ccc;
+    color: #ccc;
+    transition: background-color 0.3s ease-in, color 0.3s ease-in, border-color 0.3s ease-in;
+    cursor: pointer;
+}
