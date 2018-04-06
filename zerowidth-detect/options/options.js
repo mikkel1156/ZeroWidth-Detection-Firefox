@@ -4,7 +4,8 @@ function gotError(error) {
 
 document.querySelector("#reset").addEventListener("click", function() {
     browser.storage.local.set({
-        whitelist: ""
+        whitelist: "",
+        replace: ""
     });
 });
 
