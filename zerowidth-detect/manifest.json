@@ -32,7 +32,8 @@
     "permissions": [
         "tabs",
         "storage",
-        "webRequest"
+        "webRequest",
+        "clipboardWrite"
     ]
 
 }
