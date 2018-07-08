@@ -3,7 +3,7 @@
     "name": "ZeroWidth Detection",
     "version": "1.0",
 
-    "description": "Checks websites that you visit for invisible zero-width characters and replaces them with an emoji while alerting you about it.",
+    "description": "Checks websites that you visit for invisible zero-width characters and replaces them with a specified character. Has the ability to copy all the characters found.",
 
     "icons": {
         "48": "icon.png"

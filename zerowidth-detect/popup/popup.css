@@ -1,37 +1,44 @@
 html, body {
+    margin: 0px;
     width: 200px;
+    display: inline-block;
 }
 
 #popup-header h1 {
-    font-size: 20px;
+    margin: 0px;
+    color: white;
+    font-size: 15px;
     text-align: center;
+    background-color: #36393E;
 }
 
 #info {
+    padding: 5px;
+    margin-top: 5px;
     margin-bottom: 5px;
 }
 
 .button {
-    display: inline-block;
-    width: 50px;
-    padding: 4px;
     color: #fff;
+    outline: none;
+    text-align: center;
+    text-decoration: none;
     background-color: #000;
     border: 2px solid #000;
-    text-align: center;
-    outline: none;
-    text-decoration: none;
     transition: background-color 0.2s ease-out, color 0.2s ease-out;
 
+    width: 50px;
+    padding: 4px;
     display: block;
     margin-left: auto;
     margin-right: auto;
 }
+
 .button:hover,
 .button:active {
-    background-color: #fff;
-    border-color: #ccc;
     color: #ccc;
-    transition: background-color 0.3s ease-in, color 0.3s ease-in, border-color 0.3s ease-in;
     cursor: pointer;
+    border-color: #ccc;
+    background-color: #fff;
+    transition: background-color 0.3s ease-in, color 0.3s ease-in, border-color 0.3s ease-in;
 }

@@ -4,5 +4,33 @@ table {
     border-collapse: collapse;
 }
 
+th {
+    color: white;
+    background-color: #36393E;
+}
+
 .remove-domain { float: right; }
 .remove-domain:hover { cursor: pointer; }
+
+button {
+    color: #fff;
+    outline: none;
+    text-align: center;
+    text-decoration: none;
+    background-color: #000;
+    border: 2px solid #000;
+    transition: background-color 0.2s ease-out, color 0.2s ease-out;
+
+    width: 50px;
+    padding: 0px;
+    display: inline-block;
+}
+
+button:hover,
+button:active {
+    color: #ccc;
+    cursor: pointer;
+    border-color: #ccc;
+    background-color: #fff;
+    transition: background-color 0.3s ease-in, color 0.3s ease-in, border-color 0.3s ease-in;
+}

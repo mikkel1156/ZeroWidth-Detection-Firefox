@@ -7,8 +7,8 @@ function gotError(error) {
 document.querySelector("#reset").addEventListener("click", function() {
     //  Set all the settings to empty.
     browser.storage.local.set({
-        whitelist: "",
-        replace: ""
+        whitelist: null,
+        replace: null
     });
 
     //  Update settings on the page.
