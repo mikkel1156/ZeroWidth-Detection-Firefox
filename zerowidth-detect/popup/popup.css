@@ -18,6 +18,8 @@ html, body {
     margin-bottom: 5px;
 }
 
+#buttons { text-align: center; }
+
 .button {
     color: #fff;
     outline: none;
@@ -29,9 +31,7 @@ html, body {
 
     width: 50px;
     padding: 4px;
-    display: block;
-    margin-left: auto;
-    margin-right: auto;
+    display: inline-block;
 }
 
 .button:hover,

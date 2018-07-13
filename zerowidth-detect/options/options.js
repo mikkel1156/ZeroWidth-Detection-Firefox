@@ -1,6 +1,6 @@
 //  Outputting errors.
 function gotError(error) {
-    console.log(`Error: ${error}`);
+    console.log(`[Zero-Width Detect] ${error}`);
 }
 
 //  Resetting all the settings.

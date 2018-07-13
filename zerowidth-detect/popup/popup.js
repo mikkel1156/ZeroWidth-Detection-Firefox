@@ -4,7 +4,7 @@ var chars = null;
 
 //  Outputting errors.
 function gotError(error) {
-    console.log(`Error: ${error}`);
+    console.log(`[Zero-Width Detect] ${error}`);
 }
 
 //  Updating the popup with new info.
@@ -28,7 +28,15 @@ function gotInfo(response) {
     });
 }
 
-//  Event for when then the copy button is clicked.
+//  Event for when the 'Scan' button is clicked.
+document.getElementById("scan").addEventListener("click", function() {
+    //  Scan the current page by calling it's function.
+    browser.tabs.executeScript({
+        code: `scanForZW();`
+    });
+});
+
+//  Event for when then the 'Copy' button is clicked.
 document.getElementById("copy-chars").addEventListener("click", function() {
     //  Query for all the open tabs.
     browser.tabs.query({

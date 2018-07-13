@@ -3,7 +3,7 @@ var charDict = {};
 
 //  Outputting errors.
 function gotError(error) {
-    console.log(`Error: ${error}`);
+    console.log(`[Zero-Width Detect] ${error}`);
 }
 
 //  Handle messages sent to the background script.
