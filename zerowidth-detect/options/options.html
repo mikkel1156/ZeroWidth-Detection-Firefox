@@ -7,14 +7,20 @@
 
     <body>
         <div>
-            <p><label>Replace characters with:</label> <input id="new-replace" type="text" size="1"><button id="save-replace" style="margin-left: 5px;">Save</button></p>
+            <h2>General options:</h2>
+            <p><label>Replace characters with: </label><input id="new-replace" type="text" size="1"></p>
             <p>Whitelisted domains:</p>
 
             <table id="whitelist">
             </table>
 
-            <p><label>Add domain:</label> <input id="new-domain" type="text"><button id="add-domain" style="margin-left: 5px;">Add</button></p>
-            <button id="reset">Reset</button>
+            <p><label>Add domain: </label><input id="new-domain" type="text"><button id="add-domain" style="margin-left: 5px;">Add</button></p>
+
+            <h2>Extra options:</h2>
+            <p><input type="checkbox" id="check-clipboard"><label>Check copied text for hidden characters</label></p>
+            <p><input type="checkbox" id="check-on-active"><label>Check page again when tab becomes active</label></p>
+            <hr>
+            <button id="save" style="margin-left: 5px;">Save</button> <button id="reset">Reset</button>
         </div>
         <script src="options.js"></script>
     </body>

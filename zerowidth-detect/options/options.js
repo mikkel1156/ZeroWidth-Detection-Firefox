@@ -8,7 +8,9 @@ document.querySelector("#reset").addEventListener("click", function() {
     //  Set all the settings to empty.
     browser.storage.local.set({
         whitelist: null,
-        replace: null
+        replace: null,
+        check_clipboard: false,
+        check_on_active: false
     });
 
     //  Update settings on the page.
@@ -34,10 +36,12 @@ document.querySelector("#add-domain").addEventListener("click", function() {
 });
 
 //  Save the custom replace string.
-document.querySelector("#save-replace").addEventListener("click", function() {
-    //  Set the replace string setting to the new one.
+document.querySelector("#save").addEventListener("click", function() {
+    //  Save the options as their current state.
     browser.storage.local.set({
-        replace: document.querySelector("#new-replace").value
+        replace: document.querySelector("#new-replace").value,
+        check_clipboard: document.querySelector("#check-clipboard").checked,
+        check_on_active: document.querySelector("#check-on-active").checked
     });
 });
 
@@ -99,6 +103,22 @@ function restoreOptions() {
             document.querySelector("#new-replace").value = "🕵";
         } else {
             document.querySelector("#new-replace").value = result.replace;
+        }
+    }, gotError);
+
+    //  Query for check clipboard.
+    browser.storage.local.get("check_clipboard").then(function(result) {
+        //  If a value found, then set checked status to that value.
+        if (result.check_clipboard != null) {
+            document.querySelector("#check-clipboard").checked = result.check_clipboard;
+        }
+    }, gotError);
+
+    //  Query for check on active.
+    browser.storage.local.get("check_on_active").then(function(result) {
+        //  If a value found, then set checked status to that value.
+        if (result.check_on_active != null) {
+            document.querySelector("#check-on-active").checked = result.check_on_active;
         }
     }, gotError);
 }

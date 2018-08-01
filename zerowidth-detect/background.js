@@ -2,7 +2,7 @@
 var charDict = {};
 
 //  Outputting errors.
-function gotError(error) {
+function handleError(error) {
     console.log(`[Zero-Width Detect] ${error}`);
 }
 
@@ -26,6 +26,16 @@ browser.runtime.onMessage.addListener(function(request, sender, sendResponse) {
 
 //  Event for when another tab becomes active.
 browser.tabs.onActivated.addListener(function(activeInfo) {
+    //  Check if the 'check on active' option is set.
+    browser.storage.local.get("check_on_active").then(function(result) {
+        if (result.check_on_active) {
+            //  Scan the current page by calling it's function.
+            browser.tabs.executeScript({
+                code: `scanForZW();`
+            });
+        }
+    }, handleError);
+    
     //  Query all the windows to find the active one.
     browser.tabs.query({
         currentWindow: true,
@@ -45,5 +55,5 @@ browser.tabs.onActivated.addListener(function(activeInfo) {
                 text: null
             });
         }
-    }, gotError);
+    }, handleError);
 });

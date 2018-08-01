@@ -1,3 +1,8 @@
+//  Global values.
+var getClipboard = false;
+var setClipboard = false;
+var newClipboard = null;
+
 //  Outputting errors.
 function handleError(error) {
     console.log(`[Zero-Width Detect] ${error}`);
@@ -11,7 +16,7 @@ browser.runtime.onMessage.addListener(function(request, sender, sendResponse) {
 });
 
 function scanForZW() {
-    console.log("SCANNED!");
+    console.log("[Zero-Width Detect]: Scanning site.");
     //  Setup the DOM walker, filtering only to text nodes.
     var walker = document.createTreeWalker(
         document.body,
@@ -108,6 +113,66 @@ function scanForZW() {
         }, handleError);
     }, handleError);
 }
+
+//  Event for when a copy action is triggered.
+document.addEventListener('copy', function(e) {
+    //  Check if the 'check clipboard' option is set.
+    browser.storage.local.get("check_clipboard").then(function(result) {
+        if (result.check_clipboard) {
+            console.log("[Zero-Width Detect]: Checking clipboard.");
+
+            //  Set 'getClipboard' trigger to true.
+            getClipboard = true;
+
+            //  Trigger a paste action.
+            document.execCommand("Paste");
+        }
+    }, handleError);
+
+    if (setClipboard) {
+        //  Set the clipboard's data to the stripped clipboard data.
+        e.clipboardData.setData("text/plain", newClipboard);
+        newClipboard = null;
+
+        //  Reset 'setClipboard' trigger.
+        setClipboard = false;
+
+        //  Prevent normal pasting.
+        e.preventDefault();
+    }
+});
+
+//  Event for when a copy action is triggered.
+document.addEventListener('paste', function(e) {
+    //  Check if the 'getClipboard' value is set.
+    if (getClipboard) {
+        //  Get the clipboard's data and store it in a variable.
+        let clipboardData = (e.clipboardData || window.clipboardData).getData('text');
+
+        //  Regular expression for all the zero-width characters.
+        var zwRE = RegExp("(‍|‌|​|⁠)", "g");
+
+        //  Check if the text in the node contains any zero-width characters.
+        if (zwRE.test(clipboardData)) {
+            console.log("[Zero-Width Detect]: Zero-width characters found in clipboard. Removing them.");
+
+            //  Strip all zero-width characters.
+            newClipboard = clipboardData.replace(zwRE, "")
+
+            //  Set 'setClipboard' trigger to true.
+            setClipboard = true;
+
+            //  Trigger a copy action.
+            document.execCommand("Copy");
+        }
+
+        //  Reset 'getClipboard' trigger.
+        getClipboard = false;
+
+        //  Prevent normal pasting.
+        e.preventDefault();
+    }
+});
 
 //  Wait for the DOM to be loaded.
 document.addEventListener("DOMContentLoaded", function(event) {
